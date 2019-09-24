@@ -4,14 +4,22 @@
 
 import sys
 
+# buildLine
+# Creates line that will separate each row and overall
+# Returns: Nothing.
 def buildLine(number):
     count = 0
     line = "+"
     while count < (number+1):
-        line+="---+"
+        line+="----+"
         count+=1
     return line
 
+# generateHeader
+# Takes the size, and the OP_CODE.
+# Creates the header row that lists the type of table,
+# then the numbers.
+# Returns: A list
 def generateHeader(number, OP_CODE):
     header = []
     if(OP_CODE)==1:
@@ -29,6 +37,7 @@ def generateHeader(number, OP_CODE):
 # OP_CODE = what operation to do.
 #   1:  Addition
 #   2:  Multiplication
+# Returns: A list of lists
 
 def generateTable(number, OP_CODE):
     curRow = []
@@ -49,18 +58,24 @@ def generateTable(number, OP_CODE):
         table.append(curRow)
     return table
 
+# printTable
+# Prints the table.
+# Formatted for double digits (up to 99)
+# Returns: Nothing
 def printTable(table,line):
     print(line)
     rowNum = 0
     for row in table:
         if rowNum!=0:
-            print "| "+str(rowNum),
+            print "| "+'{:>2}'.format(str(rowNum)),
         rowNum+=1
         for val in row:
-            print "| "+str(val),
+            print "| "+'{:>2}'.format(str(val)),
         print("|")
         print(line)
-        
+
+# Main
+# Runs the program
 if len(sys.argv)!=2:
     print("Invalid Input.")
 else:
@@ -68,7 +83,10 @@ else:
     myLine = buildLine(number)
     addTable = generateTable(number, 1)
     mulTable = generateTable(number, 2)
+    print("ADDITION TABLE")
     printTable(addTable,myLine) 
     print("")
+    print("MULTIPLICATION TABLE")
     printTable(mulTable,myLine)
+    print("")
         
